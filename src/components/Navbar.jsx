@@ -1,42 +1,138 @@
-import { useState } from "react";
-import "../index.css";
+// // src/components/Navbar.jsx
+// import React, { useState } from "react";
+// import { Menu, X } from "lucide-react";
+// import { Link } from "react-router-dom";
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const navLinks = ["Home", "About Us", "Airlines", "Agents", "Contact Us"];
+
+// const Navbar = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   const navLinks = [
+//     { name: "Home", href: "#" },
+//     { name: "About Us", href: "#" },
+//     { name: "Airlines", href: "#" },
+//     { name: "Agents", href: "#" },
+//     { name: "Contact Us", href: "#" },
+//   ];
+
+//   return (
+//     <nav className="fixed top-0 w-full z-20 bg-gray-900/70 backdrop-blur-md text-white">
+//       <div className="container mx-auto flex justify-between items-center px-6 py-4">
+//         {/* Left side: Logo */}
+//         <div className="text-2xl font-extrabold tracking-wide text-blue-400">
+//           ADL
+//         </div>
+
+//         {/* Desktop Menu */}
+//         <ul className="hidden md:flex flex-1 justify-evenly ml-12">
+//           {navLinks.map((link, idx) => (
+//             <li key={idx}>
+//               <a
+//                 href={link.href}
+//                 className="hover:text-blue-400 transition-colors font-medium"
+//               >
+//                 {link.name}
+//               </a>
+//             </li>
+//           ))}
+//         </ul>
+
+//         {/* Mobile Hamburger */}
+//         <button
+//           className="md:hidden focus:outline-none"
+//           onClick={() => setIsOpen(!isOpen)}
+//         >
+//           {isOpen ? <X size={28} /> : <Menu size={28} />}
+//         </button>
+//       </div>
+
+//       {/* Mobile Menu */}
+//       {isOpen && (
+//         <div className="md:hidden bg-gray-900/95 backdrop-blur-md px-6 py-4 space-y-4">
+//           {navLinks.map((link, idx) => (
+//             <a
+//               key={idx}
+//               href={link.href}
+//               className="block text-white hover:text-blue-400 transition-colors"
+//             >
+//               {link.name}
+//             </a>
+//           ))}
+//         </div>
+//       )}
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
+
+
+
+
+
+
+// src/components/Navbar.jsx
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navLinks = [
+    { name: "Home", href: "#" },
+    { name: "About Us", href: "#" },
+    { name: "Airlines", href: "#" },
+    { name: "Agents", href: "#" },
+    { name: "Contact Us", href: "#" },
+  ];
 
   return (
-    <nav>
-      <div className="container">
-        <a href="#home" className="brand">
-          ADL Aviation
-        </a>
+    <nav className="fixed top-0 w-full z-50 bg-gray-900 text-white shadow-lg">
+      <div className="container mx-auto flex justify-between items-center px-6 py-4">
+        {/* Logo */}
+        <div className="text-2xl font-extrabold tracking-wide text-blue-400">
+          ADL
+        </div>
 
-        <ul className={`nav-links ${open ? "active" : ""}`}>
-          {navLinks.map((label) => (
-            <li key={label}>
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex flex-1 justify-evenly ml-12">
+          {navLinks.map((link, idx) => (
+            <li key={idx}>
               <a
-                href={`#${label.toLowerCase().replace(/\s+/g, "-")}`}
-                onClick={() => setOpen(false)}
+                href={link.href}
+                className="hover:text-blue-400 transition-colors font-medium"
               >
-                {label}
+                {link.name}
               </a>
             </li>
           ))}
         </ul>
 
+        {/* Mobile Hamburger */}
         <button
-          className="menu-toggle"
-          aria-label="Toggle menu"
-          onClick={() => setOpen((prev) => !prev)}
+          className="md:hidden focus:outline-none"
+          onClick={() => setIsOpen(!isOpen)}
         >
-          {open ? (
-            <span>&#10005;</span> // X symbol
-          ) : (
-            <span>&#9776;</span> // Hamburger menu
-          )}
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-gray-900 px-6 py-4 space-y-4">
+          {navLinks.map((link, idx) => (
+            <a
+              key={idx}
+              href={link.href}
+              className="block text-white hover:text-blue-400 transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
-}
+};
+
+export default Navbar;
