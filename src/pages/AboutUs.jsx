@@ -6,17 +6,17 @@ import { FaBullseye, FaLightbulb } from "react-icons/fa";
 
 const About = () => {
   return (
-    <div className="relative overflow-hidden bg-white text-gray-900">
+    <div className="relative overflow-hidden bg-white text-gray-900 font-brand">
       <Navbar />
 
       {/* Top Section: About + Collage */}
       <section className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Left: Title + Text */}
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold text-[#003366]">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-[#3169e3]">
             About ADL Aviation
           </h1>
-          <p className="mt-6 text-base md:text-lg text-gray-700 leading-relaxed">
+          <p className="mt-6 text-base md:text-lg text-gray-700 leading-relaxed font-bold">
             We represent and manage cargo operations for leading carriers,
             extending their brand with comprehensive coverage.
           </p>
@@ -43,22 +43,21 @@ const About = () => {
             className="img4"
           />
         </div>
-
       </section>
 
       {/* Our Story Section */}
-      <section className="relative bg-[#003366] text-white pt-32 pb-20">
-        {/* Top Wave */}
+      <section className="relative bg-[#003366] text-white pt-32 pb-20 overflow-hidden font-brand">
+        {/* Full Background Wave */}
         <img
           src="public/images/about/—Pngtree—blue wave vector shape background_8928498.png"
-          alt="Wave Top"
-          className="absolute -top-1 left-0 w-full pointer-events-none"
+          alt="Wave Background"
+          className="absolute inset-0 w-[115%] h-full object-cover z-0 pointer-events-none"
         />
 
-        <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left: Collage (5 images styled) */}
+        {/* Content sits above wave */}
+        <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center z-10">
+          {/* Left: Collage */}
           <div className="grid grid-cols-2 gap-4">
-            {/* Two tall images */}
             <img
               src="public/images/about/648493b9c733359ceda93fed64080c3c2827254e (1).jpg"
               alt="Story 1"
@@ -69,8 +68,6 @@ const About = () => {
               alt="Story 2"
               className="row-span-2 w-full h-full object-cover rounded-xl"
             />
-
-            {/* Two small stacked images */}
             <img
               src="public/images/about/4af5c5452bd50bb3b31e258741bbc90db9b0eb07.jpg"
               alt="Story 3"
@@ -81,8 +78,6 @@ const About = () => {
               alt="Story 4"
               className="object-cover w-full h-28 md:h-40 rounded-xl"
             />
-
-            {/* One big wide image at bottom */}
             <img
               src="public/images/about/33258dcd2e8d6ba50f276159a69fe728c9d3de4e.jpg"
               alt="Story 5"
@@ -92,8 +87,8 @@ const About = () => {
 
           {/* Right: Text */}
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold">Our Story</h2>
-            <p className="mt-6 text-base md:text-lg leading-relaxed">
+            <h2 className="text-2xl md:text-3xl font-extrabold">Our Story</h2>
+            <p className="mt-6 text-base md:text-lg leading-relaxed font-bold">
               ADL Aviation Ltd, founded in 2009, is East Africa’s leading
               independent GSA company. We represent major global airlines with
               dedicated cargo teams that specialize in general cargo, special
@@ -102,23 +97,16 @@ const About = () => {
             </p>
           </div>
         </div>
-
-        {/* Bottom Wave */}
-        <img
-          src="/image/waves/wave-bottom.svg"
-          alt="Wave Bottom"
-          className="absolute bottom-0 left-0 w-full pointer-events-none"
-        />
       </section>
 
       {/* Mission & Vision */}
-      <section className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 text-center">
+      <section className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 text-center font-brand">
         <div>
           <div className="flex justify-center text-[#003366] text-5xl mb-4">
             <FaBullseye />
           </div>
-          <h3 className="text-xl font-semibold text-[#003366]">Our Mission</h3>
-          <p className="mt-4 text-gray-700 leading-relaxed">
+          <h3 className="text-xl font-extrabold text-[#003366]">Our Mission</h3>
+          <p className="mt-4 text-gray-700 leading-relaxed font-bold">
             To be a leading global General Sales & Service Agent (GSSA),
             delivering world-class operations by representing top-tier airlines
             with unmatched professionalism, integrity, & commitment.
@@ -128,8 +116,8 @@ const About = () => {
           <div className="flex justify-center text-[#003366] text-5xl mb-4">
             <FaLightbulb />
           </div>
-          <h3 className="text-xl font-semibold text-[#003366]">Our Vision</h3>
-          <p className="mt-4 text-gray-700 leading-relaxed">
+          <h3 className="text-xl font-extrabold text-[#003366]">Our Vision</h3>
+          <p className="mt-4 text-gray-700 leading-relaxed font-bold">
             To lead as the most trusted & innovative global GSSA, bridging
             Africa’s top air cargo capacity to international markets through
             seamless solutions, innovation, & strategic partnerships that
@@ -138,12 +126,21 @@ const About = () => {
         </div>
       </section>
 
+      {/* Bottom Wave */}
+      <img
+        src="/image/waves/wave-bottom.svg"
+        alt="Wave Bottom"
+        className="absolute bottom-0 left-0 w-full pointer-events-none"
+      />
+
       {/* Newsletter Section */}
-      <section className="bg-[#003366] text-white py-12 px-6 text-center">
-        <h3 className="text-xl md:text-2xl font-bold">
+      <section className="bg-[#003366] text-white py-12 px-6 text-center font-brand">
+        <h3 className="text-xl md:text-2xl font-extrabold">
           Sign up for our newsletter
         </h3>
-        <p className="mt-2 text-gray-200">Get the latest news and updates.</p>
+        <p className="mt-2 text-gray-200 font-bold">
+          Get the latest news and updates.
+        </p>
         <form className="mt-6 flex flex-col md:flex-row gap-4 justify-center">
           <input
             type="email"
