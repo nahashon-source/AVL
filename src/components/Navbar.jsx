@@ -1,134 +1,62 @@
-// // src/components/Navbar.jsx
-// import React, { useState } from "react";
-// import { Menu, X } from "lucide-react";
-// import { Link } from "react-router-dom";
-
-
-// const Navbar = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   const navLinks = [
-//     { name: "Home", href: "#" },
-//     { name: "About Us", href: "#" },
-//     { name: "Airlines", href: "#" },
-//     { name: "Agents", href: "#" },
-//     { name: "Contact Us", href: "#" },
-//   ];
-
-//   return (
-//     <nav className="fixed top-0 w-full z-20 bg-gray-900/70 backdrop-blur-md text-white">
-//       <div className="container mx-auto flex justify-between items-center px-6 py-4">
-//         {/* Left side: Logo */}
-//         <div className="text-2xl font-extrabold tracking-wide text-blue-400">
-//           ADL
-//         </div>
-
-//         {/* Desktop Menu */}
-//         <ul className="hidden md:flex flex-1 justify-evenly ml-12">
-//           {navLinks.map((link, idx) => (
-//             <li key={idx}>
-//               <a
-//                 href={link.href}
-//                 className="hover:text-blue-400 transition-colors font-medium"
-//               >
-//                 {link.name}
-//               </a>
-//             </li>
-//           ))}
-//         </ul>
-
-//         {/* Mobile Hamburger */}
-//         <button
-//           className="md:hidden focus:outline-none"
-//           onClick={() => setIsOpen(!isOpen)}
-//         >
-//           {isOpen ? <X size={28} /> : <Menu size={28} />}
-//         </button>
-//       </div>
-
-//       {/* Mobile Menu */}
-//       {isOpen && (
-//         <div className="md:hidden bg-gray-900/95 backdrop-blur-md px-6 py-4 space-y-4">
-//           {navLinks.map((link, idx) => (
-//             <a
-//               key={idx}
-//               href={link.href}
-//               className="block text-white hover:text-blue-400 transition-colors"
-//             >
-//               {link.name}
-//             </a>
-//           ))}
-//         </div>
-//       )}
-//     </nav>
-//   );
-// };
-
-// export default Navbar;
-
-
-
-
-
-
-// src/components/Navbar.jsx
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "About Us", href: "#" },
-    { name: "Airlines", href: "#" },
-    { name: "Agents", href: "#" },
-    { name: "Contact Us", href: "#" },
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/about" },
+    { name: "Airlines", href: "/airlines" },
+    { name: "Agents", href: "/agents" },
+    { name: "Contact Us", href: "/contact" },
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-gray-900 text-white shadow-lg">
-      <div className="container mx-auto flex justify-between items-center px-6 py-4">
-        {/* Logo */}
-        <div className="text-2xl font-extrabold tracking-wide text-blue-400">
-          ADL
-        </div>
+    <nav className="bg-gray-900 text-white shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
+          {/* Logo */}
+          <div className="text-2xl font-bold text-blue-400">AviationSite</div>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex flex-1 justify-evenly ml-12">
-          {navLinks.map((link, idx) => (
-            <li key={idx}>
-              <a
-                href={link.href}
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.href}
                 className="hover:text-blue-400 transition-colors font-medium"
               >
                 {link.name}
-              </a>
-            </li>
-          ))}
-        </ul>
+              </Link>
+            ))}
+          </div>
 
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+          {/* Mobile Hamburger */}
+          <div className="md:hidden flex items-center">
+            <button onClick={() => setIsOpen(!isOpen)} className="focus:outline-none">
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="md:hidden bg-gray-900 px-6 py-4 space-y-4">
-          {navLinks.map((link, idx) => (
-            <a
-              key={idx}
-              href={link.href}
-              className="block text-white hover:text-blue-400 transition-colors"
-            >
-              {link.name}
-            </a>
-          ))}
+        <div className="md:hidden bg-gray-800">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.href}
+                onClick={() => setIsOpen(false)} // closes menu after click
+                className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 hover:text-blue-400 transition"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
         </div>
       )}
     </nav>

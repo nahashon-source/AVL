@@ -5,7 +5,8 @@
 /* === Arca Majora webfonts === */
 @font-face {
   font-family: "ArcaMajora";
-  src: url("/fonts/arca-majora/ArcaMajora-Bold.woff2") format("woff2");
+  src: url("/fonts/arca-majora/ArcaMajora-Bold.woff2") format("woff2"),
+       url("/fonts/arca-majora/ArcaMajora-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -13,80 +14,118 @@
 
 @font-face {
   font-family: "ArcaMajora";
-  src: url("/fonts/arca-majora/ArcaMajora-Heavy.woff2") format("woff2");
+  src: url("/fonts/arca-majora/ArcaMajora-Heavy.woff2") format("woff2"),
+       url("/fonts/arca-majora/ArcaMajora-Heavy.woff") format("woff");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
 
-/* === Apply font rules globally === */
+/* === Global typography rules === */
 @layer base {
   h1, h2, h3, h4, h5, h6 {
+    @apply font-extrabold;
     font-family: "ArcaMajora", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 800; /* Heavy */
   }
 
   p, li, span {
+    @apply font-normal; /* lighter for better readability */
     font-family: "ArcaMajora", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 700; /* Bold */
+  }
+}
+
+/* === Custom title styles for About ADL Aviation === */
+.custom-about-title {
+  font-family: "ArcaMajora", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  color: #003366;
+  font-size: clamp(2rem, 6vw, 5rem); /* scales smoothly between mobile and desktop */
+  line-height: 1.1;
+  word-break: break-word;
+  text-align: left;
+}
+
+@media (min-width: 1024px) {
+  .custom-about-title {
+    font-size: clamp(4rem, 8vw, 8rem);
+    margin-top: -1.5rem; /* raise title slightly on large screens */
   }
 }
 
 /* === About collage styles === */
 .about-collage {
-  display: grid;
-  grid-template-columns: auto auto; /* two columns */
+  @apply grid justify-center items-start gap-5;
+  grid-template-columns: repeat(2, auto);
   grid-auto-rows: auto;
-  gap: 20px;
-  justify-content: center;
-  align-items: start;
 }
 
-/* Common image styles */
 .about-collage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  @apply object-cover;
   border-radius: 29px;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-/* Left-side images (same size) */
-.about-collage .img1,
-.about-collage .img3 {
-  width: 214px;
-  height: 214px;
-}
-
-/* Move first image slightly down */
-.about-collage .img1 {
-  margin-top: 25px; /* adjust to taste */
-}
-
-/* Top-right (slightly bigger) */
-.about-collage .img2 {
-  grid-column: 2;
-  grid-row: 1;
-  width: 260px;
-  height: 245px;
-}
-
-/* Bottom-right (dominant) */
-.about-collage .img4 {
-  grid-column: 2;
-  grid-row: 2;
-  width: 350px;
-  height: 350px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .about-collage {
-    grid-template-columns: 1fr; /* stack into one column */
+/* === Desktop / Default Fixed Sizes === */
+@media (min-width: 1025px) {
+  .about-collage .img1,
+  .about-collage .img3 {
+    width: 214px;
+    height: 214px;
   }
 
-  .about-collage img {
-    width: 100% !important;
-    height: auto !important;
-    margin-top: 0 !important; /* reset margin on small screens */
+  .about-collage .img1 {
+    margin-top: 1.5rem;
+  }
+
+  .about-collage .img2 {
+    grid-column: 2;
+    grid-row: 1;
+    width: 260px;
+    height: 245px;
+  }
+
+  .about-collage .img4 {
+    grid-column: 2;
+    grid-row: 2;
+    width: 350px;
+    height: 350px;
+  }
+}
+
+/* === Tablet: slightly smaller sizes === */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .about-collage .img1,
+  .about-collage .img3 {
+    width: 180px;
+    height: 180px;
+  }
+
+  .about-collage .img2 {
+    width: 220px;
+    height: 200px;
+  }
+
+  .about-collage .img4 {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+/* === Mobile: flexible 2-column grid === */
+@media (max-width: 768px) {
+  .about-collage {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .about-collage .img1,
+  .about-collage .img2,
+  .about-collage .img3,
+  .about-collage .img4 {
+    width: 100%;
+    height: auto;
+    margin-top: 0;
   }
 }
