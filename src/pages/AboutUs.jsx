@@ -1,9 +1,24 @@
 import React, { useState } from "react";
 import "../index.css";
-import { FaBullseye, FaLightbulb } from "react-icons/fa";
+import { motion } from "framer-motion";
+
+const MotionSection = motion.section;
+const MotionDiv = motion.div;
+const MotionImg = motion.img;
+const MotionInput = motion.input;
+const MotionButton = motion.button;
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.18 } },
+};
 
 const About = () => {
-  // Newsletter form state
   const [email, setEmail] = useState("");
 
   const handleSubmit = (e) => {
@@ -13,175 +28,246 @@ const About = () => {
       return;
     }
     alert(`Subscribed with: ${email}`);
-    setEmail(""); // reset field
+    setEmail("");
   };
 
-  // Mission & Vision Data
-  const highlights = [
-    {
-      icon: <FaBullseye />,
-      title: "Our Mission",
-      text: "To be a leading global General Sales & Service Agent (GSSA), delivering world-class operations by representing top-tier airlines with unmatched professionalism, integrity, & commitment."
+  // === Our Story Collage Styles ===
+  const storyCollageStyles = {
+    collage: {
+      position: "relative",
+      width: "100%",
+      height: "520px",
+      maxWidth: "640px",
+      marginLeft: "0",
+      marginRight: "auto",
+      pointerEvents: "auto",
     },
-    {
-      icon: <FaLightbulb />,
-      title: "Our Vision",
-      text: "To lead as the most trusted & innovative global GSSA, bridging Africa’s top air cargo capacity to international markets through seamless solutions, innovation, & strategic partnerships that connect the continent to the world."
-    }
+    collageItem: {
+      position: "absolute",
+      borderRadius: "14px",
+      overflow: "hidden",
+      boxShadow: "0 12px 30px rgba(0, 0, 0, 0.16)",
+      transition: "transform 0.28s ease, box-shadow 0.28s ease",
+      backgroundColor: "#fff",
+    },
+    collageImg: {
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      display: "block",
+    },
+    // Left column
+    collage1: { top: "12px", left: "0px", width: "200px", height: "220px", zIndex: 6 },
+    collage2: { top: "268px", left: "-70px", width: "220px", height: "210px", zIndex: 5 },
+    // Right column
+    collage3: { top: "40px", right: "180px", width: "170px", height: "170px", zIndex: 4 },
+    collage4: { top: "250px", right: "270px", width: "120px", height: "120px", zIndex: 3 },
+    collage5: { top: "390px", right: "200px", width: "220px", height: "200px", zIndex: 2 },
+  };
+
+  const storyImages = [
+    "648493b9c733359ceda93fed64080c3c2827254e (1).jpg",
+    "54ea1dd91860df5aad3770e099aae817b265dd7e.jpg",
+    "4af5c5452bd50bb3b31e258741bbc90db9b0eb07.jpg",
+    "8d8b8105930e8aac307d2f856843421237e53a84.jpg",
+    "33258dcd2e8d6ba50f276159a69fe728c9d3de4e.jpg",
   ];
 
   return (
-    <div className="relative overflow-hidden bg-white text-gray-900 font-brand">
-      {/* Top Section: About + Collage */}
-      <section className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
-        {/* Left: Title + Text */}
-        <div>
+    <div className="relative overflow-visible bg-white text-gray-900 font-brand pt-12">
+      {/* === Intro Section === */}
+      <MotionSection
+        className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <MotionDiv variants={fadeUp}>
           <h1 className="custom-about-title">
             About ADL <br /> Aviation
           </h1>
-          <p className="mt-6 text-base md:text-lg text-gray-700 leading-relaxed">
+          <p className="mt-4 text-base md:text-lg text-gray-700 leading-relaxed">
             We represent and manage cargo operations for leading carriers,
             extending their brand with comprehensive coverage.
           </p>
+        </MotionDiv>
+
+        <MotionDiv className="about-collage" variants={staggerContainer}>
+          {[
+            "7b296e817999e62a406e928025aea1c0e29248aa.jpg",
+            "648493b9c733359ceda93fed64080c3c2827254e (1).jpg",
+            "b643818345603355140a9f7644a8898b11796ab6.jpg",
+            "8d8b8105930e8aac307d2f856843421237e53a84.jpg",
+          ].map((img, i) => (
+            <MotionImg
+              key={i}
+              src={`/images/about/${img}`}
+              alt={`About collage image ${i + 1}`}
+              className={`img${i + 1}`}
+              loading="lazy"
+              variants={fadeUp}
+            />
+          ))}
+        </MotionDiv>
+      </MotionSection>
+
+      {/* === Our Story Section === */}
+      <MotionSection
+         className="relative text-white pt-6 md:pt-10 lg:pt-12 pb-16 overflow-hidden font-brand min-h-[700px]"
+  variants={fadeUp}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+>
+  {/* Wave Background (upright, not flipped) */}
+  <div className="absolute inset-0 z-0">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1440 500"
+      className="w-full h-[900px]"
+      preserveAspectRatio="none"
+      style={{ transform: "translateY(-160px)" }} // raise crest upward
+    >
+      <path
+        fill="#1E3A8A"
+        fillOpacity="1"
+        d="M0,160L60,186.7C120,213,240,267,360,288C480,309,600,299,720,261.3C840,224,960,160,1080,144C1200,128,1320,160,1380,176L1440,192L1440,0L0,0Z"
+      />
+      <path
+        fill="#3B82F6"
+        fillOpacity="0.85"
+        d="M0,256L60,234.7C120,213,240,171,360,154.7C480,139,600,149,720,181.3C840,213,960,267,1080,266.7C1200,267,1320,213,1380,186.7L1440,160L1440,0L0,0Z"
+      />
+      <path
+        fill="#60A5FA"
+        fillOpacity="0.75"
+        d="M0,320L60,309.3C120,299,240,277,360,256C480,235,600,213,720,202.7C840,192,960,192,1080,213.3C1200,235,1320,277,1380,298.7L1440,320L1440,0L0,0Z"
+      />
+    </svg>
         </div>
 
-        {/* Right: Collage */}
-        <div className="about-collage">
-          <img
-            src="/images/about/7b296e817999e62a406e928025aea1c0e29248aa.jpg"
-            alt="Cargo plane flying in the sky"
-            className="img1"
-            loading="lazy"
-          />
-          <img
-            src="/images/about/648493b9c733359ceda93fed64080c3c2827254e (1).jpg"
-            alt="Cargo plane at the airport"
-            className="img2"
-            loading="lazy"
-          />
-          <img
-            src="/images/about/b643818345603355140a9f7644a8898b11796ab6.jpg"
-            alt="Aircraft during operations"
-            className="img3"
-            loading="lazy"
-          />
-          <img
-            src="/images/about/8d8b8105930e8aac307d2f856843421237e53a84.jpg"
-            alt="Cargo plane close-up"
-            className="img4"
-            loading="lazy"
-          />
-        </div>
-      </section>
+        {/* Blurred overlays */}
+        <div className="absolute top-0 right-0 w-72 md:w-96 h-72 md:h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-60 md:w-80 h-60 md:h-80 bg-cyan-400/20 rounded-full blur-3xl"></div>
 
-      {/* Our Story Section */}
-      <section className="relative bg-[#003366] text-white pt-32 pb-20 overflow-x-hidden font-brand">
-        {/* Full Background Wave */}
-        <img
-          src="/images/about/—Pngtree—blue wave vector shape background_8928498.png"
-          alt="Decorative wave background"
-          className="absolute inset-0 w-[115%] h-full object-cover z-0 pointer-events-none"
-          loading="lazy"
-        />
+        <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center z-10">
+          {/* LEFT: Collage */}
+          <MotionDiv variants={staggerContainer} className="order-1 lg:order-1 flex justify-start">
+            <div style={storyCollageStyles.collage} className="hidden md:block">
+              {storyImages.map((img, i) => (
+                <div
+                  key={i}
+                  style={{
+                    ...storyCollageStyles.collageItem,
+                    ...storyCollageStyles[`collage${i + 1}`],
+                  }}
+                  className="hover:scale-105 hover:shadow-xl cursor-pointer"
+                >
+                  <MotionImg
+                    src={`/images/about/${img}`}
+                    alt={`Our story collage image ${i + 1}`}
+                    style={storyCollageStyles.collageImg}
+                    loading="lazy"
+                    variants={fadeUp}
+                  />
+                </div>
+              ))}
+            </div>
 
-        {/* Content sits above wave */}
-        <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center z-10">
-          {/* Left: Collage */}
-          <div className="grid grid-cols-2 gap-4">
-            <img
-              src="/images/about/648493b9c733359ceda93fed64080c3c2827254e (1).jpg"
-              alt="Cargo handling operations"
-              className="row-span-2 w-full h-full object-cover rounded-xl"
-              loading="lazy"
-            />
-            <img
-              src="/images/about/54ea1dd91860df5aad3770e099aae817b265dd7e.jpg"
-              alt="Air freight services"
-              className="row-span-2 w-full h-full object-cover rounded-xl"
-              loading="lazy"
-            />
-            <img
-              src="/images/about/4af5c5452bd50bb3b31e258741bbc90db9b0eb07.jpg"
-              alt="Aircraft loading cargo"
-              className="object-cover w-full h-auto md:h-40 rounded-xl"
-              loading="lazy"
-            />
-            <img
-              src="/images/about/8d8b8105930e8aac307d2f856843421237e53a84.jpg"
-              alt="Cargo aircraft side view"
-              className="object-cover w-full h-auto md:h-40 rounded-xl"
-              loading="lazy"
-            />
-            <img
-              src="/images/about/33258dcd2e8d6ba50f276159a69fe728c9d3de4e.jpg"
-              alt="Large aircraft fleet"
-              className="col-span-2 object-cover w-full h-auto md:h-72 rounded-xl"
-              loading="lazy"
-            />
-          </div>
+            {/* Mobile fallback */}
+            <div className="md:hidden flex justify-center">
+              <MotionImg
+                src={`/images/about/${storyImages[1]}`}
+                alt="Our story"
+                className="w-72 h-72 sm:w-80 sm:h-80 object-cover rounded-2xl shadow-lg"
+                loading="lazy"
+                variants={fadeUp}
+              />
+            </div>
+          </MotionDiv>
 
-          {/* Right: Text */}
-          <div>
+          {/* RIGHT: Text */}
+          <MotionDiv variants={fadeUp} className="order-2 lg:order-2">
             <h2 className="text-2xl md:text-3xl font-extrabold">Our Story</h2>
-            <p className="mt-6 text-base md:text-lg leading-relaxed">
-              ADL Aviation Ltd, founded in 2009, is East Africa’s leading
+            <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-100">
+              ADL Aviation Ltd, founded in 2009, is East Africa's leading
               independent GSA company. We represent major global airlines with
               dedicated cargo teams that specialize in general cargo, special
               cargo, and project logistics — serving both local and
               international forwarders.
             </p>
-          </div>
+          </MotionDiv>
         </div>
-      </section>
+      </MotionSection>
 
-      {/* Mission & Vision (Dynamic) */}
-      <section className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 text-center font-brand">
-        {highlights.map((item, idx) => (
-          <div key={idx}>
-            <div className="flex justify-center text-[#003366] text-5xl mb-4">
-              {item.icon}
-            </div>
-            <h3 className="text-xl font-extrabold text-[#003366]">{item.title}</h3>
-            <p className="mt-4 text-gray-700 leading-relaxed">{item.text}</p>
-          </div>
-        ))}
-      </section>
+      {/* === Mission & Vision === */}
+      <MotionSection
+        className="mission-vision-section"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="mission-vision">
+          <MotionDiv className="mv-block" variants={fadeUp}>
+            <img src="/images/about/Square-removebg-preview.png" alt="Our Mission" className="mv-img" />
+            <h3>Our Mission</h3>
+            <p>
+              To be a leading global General Sales & Service Agent (GSSA), delivering
+              world-class operations by representing top-tier airlines with unmatched
+              professionalism, integrity, & commitment.
+            </p>
+          </MotionDiv>
 
-      {/* Bottom Wave */}
-      <img
-        src="/image/waves/wave-bottom.svg"
-        alt="Bottom decorative wave"
-        className="absolute bottom-0 left-0 w-full pointer-events-none"
-        loading="lazy"
-      />
+          <MotionDiv className="mv-block" variants={fadeUp}>
+            <img src="/images/about/Colors-removebg-preview.png" alt="Our Vision" className="mv-img" />
+            <h3>Our Vision</h3>
+            <p>
+              To lead as the most trusted & innovative global GSSA, bridging Africa's
+              top air cargo capacity to international markets through seamless
+              solutions, innovation, & strategic partnerships that connect the
+              continent to the world.
+            </p>
+          </MotionDiv>
+        </div>
+      </MotionSection>
 
-      {/* Newsletter Section */}
-      <section className="bg-[#003366] text-white py-12 px-6 text-center font-brand">
-        <h3 className="text-xl md:text-2xl font-extrabold">
+      {/* === Newsletter === */}
+      <MotionSection
+        className="bg-[#003366] text-white py-10 px-6 text-center font-brand"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <h3 className="text-lg md:text-xl font-extrabold">
           Sign up for our newsletter
         </h3>
-        <p className="mt-2 text-gray-200">
-          Get the latest news and updates.
-        </p>
+        <p className="mt-1 text-gray-200">Get the latest news and updates.</p>
+
         <form
           onSubmit={handleSubmit}
-          className="mt-6 flex flex-col md:flex-row gap-4 justify-center"
+          className="mt-5 flex flex-col md:flex-row gap-3 justify-center"
         >
-          <input
+          <MotionInput
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="px-4 py-3 rounded-xl w-full md:w-96 text-gray-900 focus:outline-none"
+            className="px-4 py-2 rounded-xl w-full md:w-96 text-gray-900 focus:outline-none"
+            whileFocus={{ scale: 1.02 }}
           />
-          <button
+          <MotionButton
             type="submit"
-            className="px-6 py-3 bg-green-500 rounded-xl font-medium hover:bg-green-600"
+            className="px-5 py-2 bg-green-500 rounded-xl font-medium hover:bg-green-600"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             Subscribe
-          </button>
+          </MotionButton>
         </form>
-      </section>
+      </MotionSection>
     </div>
   );
 };

@@ -23,14 +23,29 @@
 
 /* === Global typography rules === */
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-extrabold;
+  html, body {
     font-family: "ArcaMajora", ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.55;
+    color: #111827; /* Tailwind gray-900 */
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 800; /* Heavy for headings */
+    line-height: 1.2;
+    letter-spacing: -0.01em; /* tighten for strong titles */
+  }
+
+  p, li, span, input, button, a {
+    font-weight: 700; /* Bold by default */
+    letter-spacing: 0.02em; /* add breathing room */
+  }
+}
+
+/* === Make body text lighter on mobile === */
+@media (max-width: 768px) {
   p, li, span {
-    @apply font-normal; /* lighter for better readability */
-    font-family: "ArcaMajora", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400; /* easier to read on phones */
+    letter-spacing: 0.01em;
   }
 }
 
@@ -43,6 +58,7 @@
   line-height: 1.1;
   word-break: break-word;
   text-align: left;
+  letter-spacing: -0.015em; /* keep hero titles tight */
 }
 
 @media (min-width: 1024px) {
@@ -128,4 +144,407 @@
     height: auto;
     margin-top: 0;
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === Our Story Mosaic (Figma-like 5 images) === */
+.our-story-collage {
+  display: grid;
+  grid-template-areas:
+    "img1 img2 img3"
+    "img4 img2 img5";
+  grid-template-columns: 1.3fr 0.8fr 1.3fr; /* side columns wider, center narrower */
+  gap: 14px;
+  justify-content: center;
+}
+
+/* Shared image styles */
+.story-img {
+  border-radius: 14px;
+  object-fit: cover;
+  width: 100%;
+  display: block;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease;
+}
+
+.story-img:hover {
+  transform: scale(1.05);
+}
+
+/* Placement + sizing */
+.story-img1 { grid-area: img1; height: 220px; }
+.story-img2 { grid-area: img2; height: 160px; } /* tall centerpiece */
+.story-img3 { grid-area: img3; height: 220px; }
+.story-img4 { grid-area: img4; height: 220px; }
+.story-img5 { grid-area: img5; height: 220px; }
+
+/* === Responsive === */
+@media (max-width: 992px) {
+  .our-story-collage {
+    grid-template-areas:
+      "img1 img2"
+      "img3 img2"
+      "img4 img5";
+    grid-template-columns: 1.2fr 0.8fr; /* still keep center narrower */
+  }
+  .story-img2 { height: 380px; }
+}
+
+@media (max-width: 576px) {
+  .our-story-collage {
+    grid-template-areas:
+      "img1"
+      "img2"
+      "img3"
+      "img4"
+      "img5";
+    grid-template-columns: 1fr;
+  }
+  .story-img { height: 180px; }
+  .story-img2 { height: 260px; } /* taller but balanced on mobile */
+}
+
+/* === Mission & Vision === */
+.mission-vision-section {
+  background: #003366;
+  color: white;
+  padding: 4rem 1.5rem;
+}
+
+.mission-vision {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mv-block {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 2rem;
+  border-radius: 20px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.mv-block:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.mv-img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+}
+
+.mv-block h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.mv-block p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+  .mission-vision {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Hero Section Collage - Exact Figma Replica */
+.collage {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: 40px;
+}
+
+.collage-item {
+  position: absolute;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.collage-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* LEFT SIDE - 2 images stacked */
+/* Top left image (person1) - smaller rectangular */
+.collage-1 {
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 120px;
+  z-index: 3;
+}
+
+/* Bottom left image (person2) - the large main image */
+.collage-2 {
+  top: 140px;
+  left: 0;
+  width: 240px;
+  height: 340px;
+  z-index: 4;
+}
+
+/* RIGHT SIDE - 3 images */
+/* Top right image (person3) - cropped from top, extends beyond container */
+.collage-3 {
+  top: -80px; /* Extended much higher to reach navbar area */
+  right: 0;
+  width: 220px;
+  height: 280px;
+  z-index: 1;
+  /* Crop from top to show only bottom portion */
+  clip-path: inset(100px 0 0 0 round 16px);
+}
+
+/* Middle right image (person4) - the main uncropped right image */
+.collage-4 {
+  top: 80px;
+  right: 60px;
+  width: 200px;
+  height: 260px;
+  z-index: 5; /* Highest z-index as it's the focal point */
+  border-radius: 20px; /* Slightly more rounded */
+}
+
+/* Bottom right image (person5) - partially cropped from bottom */
+.collage-5 {
+  bottom: -40px; /* Extended below to show cropping */
+  right: 140px;
+  width: 180px;
+  height: 240px;
+  z-index: 2;
+  /* Crop from bottom */
+  clip-path: inset(0 0 60px 0 round 16px);
+}
+
+/* Background wave styling */
+.wave-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+  clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 20% 100%);
+}
+
+/* Ensure the collage container allows overflow for the cropped images */
+.collage {
+  overflow: visible; /* Allow images to extend beyond container */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .collage {
+    height: 460px;
+    max-width: 520px;
+    margin-right: 20px;
+  }
+  
+  .collage-1 {
+    width: 180px;
+    height: 110px;
+  }
+  
+  .collage-2 {
+    width: 220px;
+    height: 320px;
+  }
+  
+  .collage-3 {
+    top: -100px;
+    width: 200px;
+    height: 280px;
+    clip-path: inset(120px 0 0 0 round 16px);
+  }
+  
+  .collage-4 {
+    top: 50px;
+    right: 50px;
+    width: 180px;
+    height: 260px;
+  }
+  
+  .collage-5 {
+    bottom: -50px;
+    right: 120px;
+    width: 160px;
+    height: 240px;
+    clip-path: inset(0 0 70px 0 round 16px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .collage {
+    height: 420px;
+    max-width: 480px;
+  }
+  
+  .collage-1 {
+    width: 160px;
+    height: 100px;
+  }
+  
+  .collage-2 {
+    width: 200px;
+    height: 300px;
+    top: 120px;
+  }
+  
+  .collage-3 {
+    top: -60px;
+    width: 180px;
+    height: 240px;
+    clip-path: inset(80px 0 0 0 round 16px);
+  }
+  
+  .collage-4 {
+    top: 60px;
+    right: 40px;
+    width: 160px;
+    height: 220px;
+  }
+  
+  .collage-5 {
+    bottom: -25px;
+    right: 100px;
+    width: 140px;
+    height: 200px;
+    clip-path: inset(0 0 40px 0 round 16px);
+  }
+}
+
+@media (max-width: 768px) {
+  .collage {
+    display: none !important;
+  }
+}
+
+/* Additional styling for the overall page */
+.container {
+  max-width: 1200px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom button hover effects */
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+/* Custom input styling */
+input:focus, select:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: rgb(14 165 233);
+}
+
+/* Card hover effects */
+.agent-card {
+  transition: all 0.3s ease;
+}
+
+.agent-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Newsletter section wave overlay */
+.newsletter-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: url('/images/wave-footer.png') no-repeat center bottom;
+  background-size: cover;
+  opacity: 0.3;
+}
+
+/* Trust section styling */
+.trust-logos {
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.trust-logos:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Ensure the hero section allows for the extended collage */
+.hero-section {
+  overflow: visible;
+  position: relative;
+}
+
+/* Additional z-index management for the entire hero area */
+.hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+.collage {
+  position: relative;
+  z-index: 5;
 }

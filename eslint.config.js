@@ -23,7 +23,12 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      // Ignore unused variables that start with uppercase, underscores,
+      // OR exactly "motion"
+      'no-unused-vars': [
+        'error',
+        { varsIgnorePattern: '^(motion|[A-Z_])' },
+      ],
     },
   },
 ])
