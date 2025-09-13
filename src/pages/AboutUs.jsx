@@ -126,7 +126,10 @@ const About = () => {
             className="w-full h-full"
             preserveAspectRatio="none"
           >
-            <path fill="#1E3A8A" d="M0,160 C360,80 1080,200 1440,40 L1440,600 L0,600 Z" />
+            <path
+              fill="#1E3A8A"
+              d="M0,160 C360,80 1080,200 1440,40 L1440,600 L0,600 Z"
+            />
             <path
               fill="#2563EB"
               fillOpacity="0.9"
@@ -180,17 +183,15 @@ const About = () => {
             </div>
           </MotionDiv>
 
-          {/* RIGHT: Text (always visible + blended) */}
+          {/* RIGHT: Text */}
           <MotionDiv variants={fadeUp} className="order-2 lg:order-2 relative z-20">
             <h2 className="text-2xl md:text-3xl font-extrabold">Our Story</h2>
-            <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-200 max-w-xl">
-              <span className="bg-gradient-to-r from-blue-900/60 via-blue-800/50 to-transparent px-2 py-1 rounded-lg">
-                ADL Aviation Ltd, founded in 2009, is East Africa's leading
-                independent GSA company. We represent major global airlines with
-                dedicated cargo teams that specialize in general cargo, special
-                cargo, and project logistics — serving both local and
-                international forwarders.
-              </span>
+            <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-100 bg-blue-900/40 px-4 py-3 rounded-lg shadow-md max-w-xl">
+              ADL Aviation Ltd, founded in 2009, is East Africa's leading
+              independent GSA company. We represent major global airlines with
+              dedicated cargo teams that specialize in general cargo, special
+              cargo, and project logistics — serving both local and
+              international forwarders.
             </p>
           </MotionDiv>
         </div>
@@ -198,35 +199,39 @@ const About = () => {
 
       {/* === Mission & Vision === */}
       <MotionSection
-        className="mission-vision-section"
+        className="mission-vision-section px-6 py-14 bg-white text-gray-900"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <div className="mission-vision">
-          <MotionDiv className="mv-block" variants={fadeUp}>
-            <img
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-6xl mx-auto text-center md:text-left">
+          <MotionDiv className="mv-block flex flex-col items-center md:items-start" variants={fadeUp}>
+            <MotionImg
               src="/images/about/Square-removebg-preview.png"
               alt="Our Mission"
-              className="mv-img w-16 h-16 md:w-20 md:h-20 mx-auto"
+              className="w-20 h-20 sm:w-24 sm:h-24 object-contain mb-4 cursor-pointer"
+              whileHover={{ scale: 1.1, rotate: 3, boxShadow: "0 8px 20px rgba(37, 99, 235, 0.5)" }}
+              transition={{ type: "spring", stiffness: 200 }}
             />
-            <h3 className="text-xl md:text-2xl font-bold text-white mt-2">Our Mission</h3>
-            <p className="mt-3 text-base md:text-lg leading-relaxed text-gray-100 bg-blue-900/40 px-4 py-3 rounded-lg shadow-md">
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900">Our Mission</h3>
+            <p className="mt-3 text-base md:text-lg leading-relaxed text-gray-700 bg-gray-100 px-4 py-3 rounded-lg shadow-sm">
               To be a leading global General Sales & Service Agent (GSSA), delivering
               world-class operations by representing top-tier airlines with unmatched
               professionalism, integrity, & commitment.
             </p>
           </MotionDiv>
 
-          <MotionDiv className="mv-block" variants={fadeUp}>
-            <img
+          <MotionDiv className="mv-block flex flex-col items-center md:items-start" variants={fadeUp}>
+            <MotionImg
               src="/images/about/Colors-removebg-preview.png"
               alt="Our Vision"
-              className="mv-img w-16 h-16 md:w-20 md:h-20 mx-auto"
+              className="w-20 h-20 sm:w-24 sm:h-24 object-contain mb-4 cursor-pointer"
+              whileHover={{ scale: 1.1, rotate: -3, boxShadow: "0 8px 20px rgba(59, 130, 246, 0.5)" }}
+              transition={{ type: "spring", stiffness: 200 }}
             />
-            <h3 className="text-xl md:text-2xl font-bold text-white mt-2">Our Vision</h3>
-            <p className="mt-3 text-base md:text-lg leading-relaxed text-gray-100 bg-blue-900/40 px-4 py-3 rounded-lg shadow-md">
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900">Our Vision</h3>
+            <p className="mt-3 text-base md:text-lg leading-relaxed text-gray-700 bg-gray-100 px-4 py-3 rounded-lg shadow-sm">
               To lead as the most trusted & innovative global GSSA, bridging Africa's
               top air cargo capacity to international markets through seamless
               solutions, innovation, & strategic partnerships that connect the
