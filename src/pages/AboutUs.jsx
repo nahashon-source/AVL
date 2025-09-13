@@ -56,10 +56,8 @@ const About = () => {
       objectFit: "cover",
       display: "block",
     },
-    // Left column
     collage1: { top: "12px", left: "0px", width: "200px", height: "220px", zIndex: 6 },
     collage2: { top: "268px", left: "-70px", width: "220px", height: "210px", zIndex: 5 },
-    // Right column
     collage3: { top: "40px", right: "180px", width: "170px", height: "170px", zIndex: 4 },
     collage4: { top: "250px", right: "270px", width: "120px", height: "120px", zIndex: 3 },
     collage5: { top: "390px", right: "200px", width: "220px", height: "200px", zIndex: 2 },
@@ -114,42 +112,37 @@ const About = () => {
 
       {/* === Our Story Section === */}
       <MotionSection
-         className="relative text-white pt-6 md:pt-10 lg:pt-12 pb-16 overflow-hidden font-brand min-h-[700px]"
-  variants={fadeUp}
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
->
-  {/* Wave Background (upright, not flipped) */}
-  <div className="absolute inset-0 z-0">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1440 500"
-      className="w-full h-[900px]"
-      preserveAspectRatio="none"
-      style={{ transform: "translateY(-160px)" }} // raise crest upward
-    >
-      <path
-        fill="#1E3A8A"
-        fillOpacity="1"
-        d="M0,160L60,186.7C120,213,240,267,360,288C480,309,600,299,720,261.3C840,224,960,160,1080,144C1200,128,1320,160,1380,176L1440,192L1440,0L0,0Z"
-      />
-      <path
-        fill="#3B82F6"
-        fillOpacity="0.85"
-        d="M0,256L60,234.7C120,213,240,171,360,154.7C480,139,600,149,720,181.3C840,213,960,267,1080,266.7C1200,267,1320,213,1380,186.7L1440,160L1440,0L0,0Z"
-      />
-      <path
-        fill="#60A5FA"
-        fillOpacity="0.75"
-        d="M0,320L60,309.3C120,299,240,277,360,256C480,235,600,213,720,202.7C840,192,960,192,1080,213.3C1200,235,1320,277,1380,298.7L1440,320L1440,0L0,0Z"
-      />
-    </svg>
+        className="relative text-white pt-10 pb-16 overflow-hidden font-brand min-h-[700px]"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        {/* Wave Background (Responsive) */}
+        <div className="absolute inset-0 z-0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 600"
+            className="w-full h-full"
+            preserveAspectRatio="none"
+          >
+            <path fill="#1E3A8A" d="M0,160 C360,80 1080,200 1440,40 L1440,600 L0,600 Z" />
+            <path
+              fill="#2563EB"
+              fillOpacity="0.9"
+              d="M0,200 C400,120 1040,240 1440,80 L1440,600 L0,600 Z"
+            />
+            <path
+              fill="#3B82F6"
+              fillOpacity="0.8"
+              d="M0,240 C420,160 1020,280 1440,120 L1440,600 L0,600 Z"
+            />
+          </svg>
         </div>
 
-        {/* Blurred overlays */}
-        <div className="absolute top-0 right-0 w-72 md:w-96 h-72 md:h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-60 md:w-80 h-60 md:h-80 bg-cyan-400/20 rounded-full blur-3xl"></div>
+        {/* Blurred Overlays */}
+        <div className="absolute top-0 right-0 w-56 sm:w-72 md:w-96 h-56 sm:h-72 md:h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-44 sm:w-60 md:w-80 h-44 sm:h-60 md:h-80 bg-cyan-400/20 rounded-full blur-3xl"></div>
 
         <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center z-10">
           {/* LEFT: Collage */}
@@ -187,15 +180,17 @@ const About = () => {
             </div>
           </MotionDiv>
 
-          {/* RIGHT: Text */}
-          <MotionDiv variants={fadeUp} className="order-2 lg:order-2">
+          {/* RIGHT: Text (always visible + blended) */}
+          <MotionDiv variants={fadeUp} className="order-2 lg:order-2 relative z-20">
             <h2 className="text-2xl md:text-3xl font-extrabold">Our Story</h2>
-            <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-100">
-              ADL Aviation Ltd, founded in 2009, is East Africa's leading
-              independent GSA company. We represent major global airlines with
-              dedicated cargo teams that specialize in general cargo, special
-              cargo, and project logistics — serving both local and
-              international forwarders.
+            <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-200 max-w-xl">
+              <span className="bg-gradient-to-r from-blue-900/60 via-blue-800/50 to-transparent px-2 py-1 rounded-lg">
+                ADL Aviation Ltd, founded in 2009, is East Africa's leading
+                independent GSA company. We represent major global airlines with
+                dedicated cargo teams that specialize in general cargo, special
+                cargo, and project logistics — serving both local and
+                international forwarders.
+              </span>
             </p>
           </MotionDiv>
         </div>
@@ -211,9 +206,13 @@ const About = () => {
       >
         <div className="mission-vision">
           <MotionDiv className="mv-block" variants={fadeUp}>
-            <img src="/images/about/Square-removebg-preview.png" alt="Our Mission" className="mv-img" />
-            <h3>Our Mission</h3>
-            <p>
+            <img
+              src="/images/about/Square-removebg-preview.png"
+              alt="Our Mission"
+              className="mv-img w-16 h-16 md:w-20 md:h-20 mx-auto"
+            />
+            <h3 className="text-xl md:text-2xl font-bold text-white mt-2">Our Mission</h3>
+            <p className="mt-3 text-base md:text-lg leading-relaxed text-gray-100 bg-blue-900/40 px-4 py-3 rounded-lg shadow-md">
               To be a leading global General Sales & Service Agent (GSSA), delivering
               world-class operations by representing top-tier airlines with unmatched
               professionalism, integrity, & commitment.
@@ -221,9 +220,13 @@ const About = () => {
           </MotionDiv>
 
           <MotionDiv className="mv-block" variants={fadeUp}>
-            <img src="/images/about/Colors-removebg-preview.png" alt="Our Vision" className="mv-img" />
-            <h3>Our Vision</h3>
-            <p>
+            <img
+              src="/images/about/Colors-removebg-preview.png"
+              alt="Our Vision"
+              className="mv-img w-16 h-16 md:w-20 md:h-20 mx-auto"
+            />
+            <h3 className="text-xl md:text-2xl font-bold text-white mt-2">Our Vision</h3>
+            <p className="mt-3 text-base md:text-lg leading-relaxed text-gray-100 bg-blue-900/40 px-4 py-3 rounded-lg shadow-md">
               To lead as the most trusted & innovative global GSSA, bridging Africa's
               top air cargo capacity to international markets through seamless
               solutions, innovation, & strategic partnerships that connect the
